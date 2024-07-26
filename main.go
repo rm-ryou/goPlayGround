@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/rm-ryou/goPlayGround/cmd"
+)
 
 func main() {
-	fmt.Println("Hello, World!!")
+	data := cmd.CreateData(256, 256)
+	err := cmd.OutputToFile("dist/result.ppm", data)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
