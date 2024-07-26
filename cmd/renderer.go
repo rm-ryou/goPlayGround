@@ -29,3 +29,7 @@ func createImage(width, height int) string {
 	}
 	return image.String()
 }
+
+func CreateData(width, height int) string {
+	return createFormat(width, height) + createImage(width, height)
+}
