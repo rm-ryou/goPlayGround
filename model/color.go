@@ -22,3 +22,28 @@ func (c Color) WriteColor() string {
 
 	return color.String()
 }
+
+// TODO: use interface
+func (c Color) Add(other Color) Color {
+	return Color{
+		R: c.R + other.R,
+		G: c.G + other.G,
+		B: c.B + other.B,
+	}
+}
+
+func (c Color) Multi(other Color) Color {
+	return Color{
+		R: c.R * other.R,
+		G: c.G * other.G,
+		B: c.B * other.B,
+	}
+}
+
+func (c Color) MultiNum(n float64) Color {
+	return Color{
+		R: c.R * n,
+		G: c.G * n,
+		B: c.B * n,
+	}
+}
