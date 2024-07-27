@@ -15,3 +15,9 @@ func (i Interval) IsContains(n float64) bool {
 func (i Interval) IsSurrouonds(n float64) bool {
 	return n > i.Min && n < i.Max
 }
+
+func (i Interval) Clamp(n float64) float64 {
+	if n < i.Min { return i.Min }
+	if n > i.Max { return i.Max }
+	return n
+}
