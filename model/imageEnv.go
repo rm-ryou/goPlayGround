@@ -45,3 +45,7 @@ func (ie imageEnv) ViewPortHeight() float64 {
 func (ie imageEnv) SamplesPerPixel() int {
 	return ie.samplesPerPixel
 }
+
+func (ie imageEnv) PixelSampleScale() float64 {
+	return 1 / float64(ie.samplesPerPixel)
+}
