@@ -1,7 +1,6 @@
 package model
 
 import (
-	"math"
 	"testing"
 )
 
@@ -19,45 +18,43 @@ func TestAt(t *testing.T) {
 }
 
 func TestColor(t *testing.T) {
-	orig := Vec3D{0, 0, 0}
-	dir := Vec3D{3, 4, 0}
-	// |dir| = 5, ie. dir.Norm = {0.6, 0.8, 0}
-	// a = 0.5 * (0.8 + 1) = 0.9
-	// 0.1 * {1, 1, 1} + 0.9 * {0.5, 0.7, 1}
-	// {0.55, 0.73, 1}
-	ray := Ray{orig, dir}
-	expected := Color{0.55, 0.73, 1}
+	t.Run("球と交差するときは球の色を出力", func(t *testing.T) {
+		orig := Vec3D{0, 0, -100}
+		dir := Vec3D{0, 0, 1}
+		ray := Ray{orig, dir}
+		objectList := new(HittableList)
+		objectList.AddObject(Sphere{Vec3D{0, 0, 0}, 50})
 
-	res := ray.Color()
-	if res != expected {
-		t.Errorf("expected: %v", expected)
-		t.Errorf("result: %v", res)
-	}
-}
+		// info of HitRecord
+		// T = 50 because the second sphere is in front of the first
+		// Point = {0, 0, -50}
+		// Norm = Point / 50 = {0, 0, -1}
+		// IsFrontFace = true
 
-func TestIsHitSphere(t *testing.T) {
-	orig := Vec3D{0, 0, -1}
-	dir := Vec3D{0, 0, 1}
-	ray := Ray{orig, dir}
+		// expect
+		// ({1, 1, 1} + {0, 0, -1}) * 0.5 = {0.5, 0.5, 0}
+		expected := Color{0.5, 0.5, 0}
 
-	t.Run("光が球と交差するときは解を返す", func(t *testing.T) {
-		center := Vec3D{0, 0, 0}
-		radius := 1
-		var expected float64 = 0
-
-		res := ray.isHitSphere(center, float64(radius))
+		res := ray.Color(*objectList)
 		if res != expected {
 			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)
 		}
 	})
 
-	t.Run("光が急と交差しない時はNaNを返す", func(t *testing.T) {
-		center := Vec3D{2, 2, 0}
-		radius := 1
+	t.Run("球と交差しないときは背景色を出力", func(t *testing.T) {
+		orig := Vec3D{0, 0, 0}
+		dir := Vec3D{3, 4, 0}
+		// |dir| = 5, ie. dir.Norm = {0.6, 0.8, 0}
+		// a = 0.5 * (0.8 + 1) = 0.9
+		// 0.1 * {1, 1, 1} + 0.9 * {0.5, 0.7, 1}
+		// {0.55, 0.73, 1}
+		ray := Ray{orig, dir}
+		expected := Color{0.55, 0.73, 1}
 
-		res := ray.isHitSphere(center, float64(radius))
-		if !math.IsNaN(res) {
+		res := ray.Color(HittableList{})
+		if res != expected {
+			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)
 		}
 	})
