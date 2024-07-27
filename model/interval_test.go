@@ -1,6 +1,8 @@
 package model
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSize(t *testing.T) {
 	interval := Interval{10, -10}
@@ -50,6 +52,43 @@ func TestIsSurrounds(t *testing.T) {
 
 		res := interval.IsContains(n)
 		if res != false {
+			t.Errorf("result: %v", res)
+		}
+	})
+}
+
+func TestClamp(t *testing.T) {
+	intensity := Interval{0.999, 0}
+
+	t.Run("nがintensity.Minより小さい時はintensity.Minを返す", func(t *testing.T) {
+		var n float64 = -1
+		expected := intensity.Min
+
+		res := intensity.Clamp(n)
+		if res != expected {
+			t.Errorf("expected: %v", expected)
+			t.Errorf("result: %v", res)
+		}
+	})
+
+	t.Run("nがintensity.Maxより大きい時はintensity.Maxを返す", func(t *testing.T) {
+		var n float64 = 1
+		expected := intensity.Max
+
+		res := intensity.Clamp(n)
+		if res != expected {
+			t.Errorf("expected: %v", expected)
+			t.Errorf("result: %v", res)
+		}
+	})
+
+	t.Run("それ以外の時はnを返す", func(t *testing.T) {
+		var n float64 = 0.5
+		var expected float64 = 0.5
+
+		res := intensity.Clamp(n)
+		if res != expected {
+			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)
 		}
 	})
