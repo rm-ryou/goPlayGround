@@ -8,9 +8,9 @@ type imageEnv struct {
 
 var (
 	ImageEnv = imageEnv{
-		aspectRatio:    16 / 9,
+		aspectRatio:    16.0 / 9.0,
 		imageWidth:     400,
-		viewPortHeight: 2,
+		viewPortHeight: 2.0,
 	}
 )
 
@@ -23,7 +23,7 @@ func (ie imageEnv) ImageWidth() int {
 }
 
 func (ie imageEnv) ImageHeight() int {
-	height := int(float64(ie.imageWidth / int(ie.aspectRatio)))
+	height := int(float64(ie.imageWidth) / ie.aspectRatio)
 
 	if height < 1 {
 		return 1
