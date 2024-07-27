@@ -1,5 +1,5 @@
 package model
 
 type Hittable interface {
-	Hit(ray Ray, rayTMax, rayTMin float64, rec HitRecord) bool
+	Hit(ray Ray, rayT Interval, rec HitRecord) bool
 }

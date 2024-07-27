@@ -15,7 +15,7 @@ func (r Ray) At(t float64) Vec3D {
 
 func (r Ray) Color(worldObjects HittableList) Color {
 	hitRec := new(HitRecord)
-	if worldObjects.Hit(r, math.Inf(1), 0, hitRec) {
+	if worldObjects.Hit(r, Interval{math.Inf(1), 0}, hitRec) {
 		return Vec3D{1, 1, 1}.Add(hitRec.Norm).MultiNum(0.5).Vec3DToColor()
 	}
 

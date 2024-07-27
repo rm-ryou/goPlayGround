@@ -21,7 +21,7 @@ func TestHitSphere(t *testing.T) {
 
 		expectedRes := true
 
-		res := sh.Hit(ray, 1, -1, &hitRecord)
+		res := sh.Hit(ray, Interval{1, -1}, &hitRecord)
 		if res != expectedRes {
 			t.Errorf("result: %v", res)
 		}
@@ -60,7 +60,7 @@ func TestHitSphere(t *testing.T) {
 
 		expected := false
 
-		res := sh.Hit(ray, 1, 1, &hitRecord)
+		res := sh.Hit(ray, Interval{1, 1}, &hitRecord)
 		if res != expected {
 			t.Errorf("result: %v", res)
 		}
