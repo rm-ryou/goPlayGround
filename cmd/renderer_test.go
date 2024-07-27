@@ -4,11 +4,14 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/rm-ryou/goPlayGround/model"
 )
 
 func TestCreateData(t *testing.T) {
-	width, height := 256, 256
-	data := CreateData(width, height)
+	width := model.ImageEnv.ImageWidth()
+	height := model.ImageEnv.ImageHeight()
+	data := CreateData()
 	var expected strings.Builder
 
 	expected.WriteString("P3\n" + strconv.Itoa(width) + " " + strconv.Itoa(height) + "\n255\n")

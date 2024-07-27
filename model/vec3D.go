@@ -74,3 +74,21 @@ func (v Vec3D) Norm() Vec3D {
 	norm := v.Length()
 	return v.DivNum(norm)
 }
+
+func withinRange(num float64) float64 {
+	if num < 0 {
+		return 0
+	} else if num > 255 {
+		return 255
+	} else {
+		return num
+	}
+}
+
+func (v Vec3D) Vec3DToColor() Color {
+	r := withinRange(v.X)
+	g := withinRange(v.Y)
+	b := withinRange(v.Z)
+
+	return Color{r, g, b}
+}

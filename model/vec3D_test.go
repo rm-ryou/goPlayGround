@@ -130,3 +130,14 @@ func TestNorm(t *testing.T) {
 		t.Errorf("result   %v", res)
 	}
 }
+
+func TestVec3DToColor(t *testing.T) {
+	vec := Vec3D{-1, 1, 256}
+	expected := Color{0, 1, 255}
+
+	res := vec.Vec3DToColor()
+	if res != expected {
+		t.Errorf("expected %v", expected)
+		t.Errorf("result   %v", res)
+	}
+}
