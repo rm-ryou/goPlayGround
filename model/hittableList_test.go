@@ -10,7 +10,7 @@ func TestHitObjectList(t *testing.T) {
 	dir := Vec3D{0, 0, 1}
 	ray := Ray{orig, dir}
 
-	t.Run("オブジェクトが光と交差するときtrueを返す", func (t *testing.T) {
+	t.Run("オブジェクトが光と交差するときtrueを返す", func(t *testing.T) {
 		objectList := new(HittableList)
 		objectList.AddObject(Sphere{Vec3D{0, 0, 0}, 10})
 		objectList.AddObject(Sphere{Vec3D{0, 0, 0}, 50})
@@ -48,7 +48,7 @@ func TestHitObjectList(t *testing.T) {
 		})
 	})
 
-	t.Run("オブジェクトが光と交差しない時falseを返す", func (t *testing.T) {
+	t.Run("オブジェクトが光と交差しない時falseを返す", func(t *testing.T) {
 		objectList := new(HittableList)
 		objectList.AddObject(Sphere{Vec3D{10, 0, -1}, 1})
 		objectList.AddObject(Sphere{Vec3D{-10, 0, -1}, 2})
