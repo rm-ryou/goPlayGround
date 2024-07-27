@@ -19,14 +19,12 @@ func createImage(width, height int, objectList model.HittableList) string {
 
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
-			pixDeltaU := model.Camera.PixelDeltaU().MultiNum(float64(j))
-			pixDeltaV := model.Camera.PixelDeltaV().MultiNum(float64(i))
-			pixCenter := model.Camera.Pixel00Loc().Add(pixDeltaU.Add(pixDeltaV))
-			rayDir := pixCenter.Sub(model.Camera.Center())
-
-			ray := model.Ray{Orig: model.Camera.Center(), Dir: rayDir}
-
-			color := ray.Color(objectList)
+			pixelColor := model.Color{}
+			for sample := 0; sample < model.ImageEnv.SamplesPerPixel(); sample++ {
+				ray := model.Camera.CalcRay(float64(j), float64(i), false)
+				pixelColor = pixelColor.Add(ray.Color(objectList))
+			}
+			color := pixelColor.MultiNum(model.ImageEnv.PixelSampleScale())
 			image.WriteString(color.WriteColor())
 		}
 	}
