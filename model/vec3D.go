@@ -85,7 +85,7 @@ func withinRange(num float64) float64 {
 	}
 }
 
-func (v Vec3D)Vec3DToColor() Color {
+func (v Vec3D) Vec3DToColor() Color {
 	r := withinRange(v.X)
 	g := withinRange(v.Y)
 	b := withinRange(v.Z)
