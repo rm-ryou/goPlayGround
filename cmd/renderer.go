@@ -16,6 +16,7 @@ func createFormat(width, height int) string {
 
 func createImage(width, height int) string {
 	var image strings.Builder
+	world := CreateObjectWorld()
 
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
@@ -26,7 +27,7 @@ func createImage(width, height int) string {
 
 			ray := model.Ray{Orig: model.Camera.Center(), Dir: rayDir}
 
-			color := ray.Color()
+			color := ray.Color(world)
 			image.WriteString(color.WriteColor())
 		}
 	}
