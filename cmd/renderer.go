@@ -19,12 +19,14 @@ func createImage(width, height int) string {
 
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
-			color := model.Color{
-				R: float64(j) / (float64(width) - 1),
-				G: float64(i) / (float64(height) - 1),
-				B: 0,
-			}
+			pixDeltaU := model.Camera.PixelDeltaU().MultiNum(float64(j))
+			pixDeltaV := model.Camera.PixelDeltaV().MultiNum(float64(i))
+			pixCenter := model.Camera.Pixel00Loc().Add(pixDeltaU.Add(pixDeltaV))
+			rayDir := pixCenter.Sub(model.Camera.Center())
 
+			ray := model.Ray{model.Camera.Center(), rayDir}
+
+			color := ray.Color()
 			image.WriteString(color.WriteColor())
 		}
 	}
