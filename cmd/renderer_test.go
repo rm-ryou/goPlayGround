@@ -14,13 +14,13 @@ func TestCreateData(t *testing.T) {
 	expected.WriteString("P3\n" + strconv.Itoa(width) + " " + strconv.Itoa(height) + "\n255\n")
 	formatLen := len(expected.String())
 	t.Run("正しいフォーマットが出力されること", func(t *testing.T) {
-			if !strings.HasPrefix(data, expected.String()) {
+		if !strings.HasPrefix(data, expected.String()) {
 			t.Errorf("expected format %v", expected.String())
 			t.Errorf("result of format %v", data[:formatLen])
 		}
 	})
 
-	t.Run("各色は0以上255以下であること", func (t *testing.T) {
+	t.Run("各色は0以上255以下であること", func(t *testing.T) {
 		image := data[formatLen:]
 
 		for _, row := range strings.Split(image, "\n") {
