@@ -1,7 +1,5 @@
 package model
 
-import "fmt"
-
 type camera struct {
 	focalLength float64
 	center      Vec3D
@@ -57,7 +55,6 @@ func (c camera) Pixel00Loc() Vec3D {
 }
 
 func sampleSquare(isTest bool) Vec3D {
-	fmt.Println(isTest)
 	if isTest {
 		return Vec3D{}
 	}
