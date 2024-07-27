@@ -12,7 +12,7 @@ var (
 		aspectRatio:     16.0 / 9.0,
 		imageWidth:      400,
 		viewPortHeight:  2.0,
-		samplesPerPixel: 10,
+		samplesPerPixel: 100,
 	}
 )
 
