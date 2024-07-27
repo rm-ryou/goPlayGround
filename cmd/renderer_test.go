@@ -11,7 +11,8 @@ import (
 func TestCreateData(t *testing.T) {
 	width := model.ImageEnv.ImageWidth()
 	height := model.ImageEnv.ImageHeight()
-	data := CreateData()
+	objectList := CreateObjectWorld()
+	data := CreateData(objectList)
 	var expected strings.Builder
 
 	expected.WriteString("P3\n" + strconv.Itoa(width) + " " + strconv.Itoa(height) + "\n255\n")

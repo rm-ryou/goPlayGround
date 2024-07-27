@@ -14,9 +14,8 @@ func createFormat(width, height int) string {
 	return format.String()
 }
 
-func createImage(width, height int) string {
+func createImage(width, height int, objectList model.HittableList) string {
 	var image strings.Builder
-	world := CreateObjectWorld()
 
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
@@ -27,16 +26,16 @@ func createImage(width, height int) string {
 
 			ray := model.Ray{Orig: model.Camera.Center(), Dir: rayDir}
 
-			color := ray.Color(world)
+			color := ray.Color(objectList)
 			image.WriteString(color.WriteColor())
 		}
 	}
 	return image.String()
 }
 
-func CreateData() string {
+func CreateData(objectList model.HittableList) string {
 	width := model.ImageEnv.ImageWidth()
 	height := model.ImageEnv.ImageHeight()
 
-	return createFormat(width, height) + createImage(width, height)
+	return createFormat(width, height) + createImage(width, height, objectList)
 }

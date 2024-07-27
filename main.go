@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-	data := cmd.CreateData()
+	objectList := cmd.CreateObjectWorld()
+	data := cmd.CreateData(objectList)
+
 	err := cmd.OutputToFile("dist/result.ppm", data)
 	if err != nil {
 		log.Fatal(err)

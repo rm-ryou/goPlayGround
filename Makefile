@@ -13,4 +13,3 @@ test:
 # convert artifact
 convert:
 	convert dist/result.ppm dist/result.png
-
