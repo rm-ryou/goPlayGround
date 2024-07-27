@@ -1,5 +1,7 @@
 package model
 
+import "fmt"
+
 type camera struct {
 	focalLength float64
 	center      Vec3D
@@ -52,4 +54,24 @@ func (c camera) Pixel00Loc() Vec3D {
 	pixelDelta := c.PixelDeltaU().Add(c.PixelDeltaV())
 
 	return c.ViewportUpperLeft().Add(pixelDelta.MultiNum(0.5))
+}
+
+func sampleSquare(isTest bool) Vec3D {
+	fmt.Println(isTest)
+	if isTest {
+		return Vec3D{}
+	}
+	return Vec3D{RandomFloat() - 0.5, RandomFloat() - 0.5, 0}
+}
+
+func (c camera) CalcRay(x, y float64, isTest bool) Ray {
+	offset := sampleSquare(isTest)
+	randomPixelU := c.PixelDeltaU().MultiNum(x + offset.X)
+	randomPixelV := c.PixelDeltaV().MultiNum(y + offset.Y)
+	randomPixelUV := randomPixelU.Add(randomPixelV)
+	pixelSample := c.Pixel00Loc().Add(randomPixelUV)
+	rayOrig := c.center
+	rayDir := pixelSample.Sub(rayOrig)
+
+	return Ray{rayOrig, rayDir}
 }
