@@ -31,3 +31,16 @@ func TestColor(t *testing.T) {
 		t.Errorf("result   %v", res)
 	}
 }
+
+func TestHitSphere(t *testing.T) {
+	orig := Vec3D{0, 0, -1}
+	dir := Vec3D{0, 0, 1}
+	ray := Ray{orig, dir}
+
+	center := Vec3D{0, 0, 0}
+	radius := 1
+
+	if !ray.isHitSphere(center, float64(radius)) {
+		t.Errorf("Results are incorrect")
+	}
+}
