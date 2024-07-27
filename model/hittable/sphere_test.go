@@ -19,7 +19,7 @@ func TestHit(t *testing.T) {
 		point := model.Vec3D{0, 0, 0}
 		norm := model.Vec3D{0, 0, 0}
 		var param float64 = 0
-		hitRecord := model.HitRecord{point, norm, param}
+		hitRecord := model.HitRecord{point, norm, param, false}
 
 		expectedRes := true
 
@@ -41,7 +41,7 @@ func TestHit(t *testing.T) {
 			expectPoint := model.Vec3D{0, 0, -1}
 			expectNorm := model.Vec3D{0, 0, -1}
 			var expectParam float64 = 0
-			expectHR := model.HitRecord{expectPoint, expectNorm, expectParam}
+			expectHR := model.HitRecord{expectPoint, expectNorm, expectParam, false}
 
 			if hitRecord != expectHR {
 				t.Errorf("expectHR: %v", expectHR)
@@ -58,7 +58,7 @@ func TestHit(t *testing.T) {
 		point := model.Vec3D{0, 0, 0}
 		norm := model.Vec3D{0, 0, 0}
 		var param float64 = 0
-		hitRecord := model.HitRecord{point, norm, param}
+		hitRecord := model.HitRecord{point, norm, param, false}
 
 		expected := false
 
@@ -71,7 +71,7 @@ func TestHit(t *testing.T) {
 			expectPoint := model.Vec3D{0, 0, 0}
 			expectNorm := model.Vec3D{0, 0, 0}
 			var expectParam float64 = 0
-			expectHR := model.HitRecord{expectPoint, expectNorm, expectParam}
+			expectHR := model.HitRecord{expectPoint, expectNorm, expectParam, false}
 
 			if hitRecord != expectHR {
 				t.Errorf("expectHR: %v", expectHR)
