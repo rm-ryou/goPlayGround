@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	data := cmd.CreateData(256, 256)
+	data := cmd.CreateData()
 	err := cmd.OutputToFile("dist/result.ppm", data)
 	if err != nil {
 		log.Fatal(err)

@@ -7,15 +7,20 @@ import (
 	"github.com/rm-ryou/goPlayGround/model"
 )
 
-func createFormat(width, height int) string {
+func createFormat() string {
 	var format strings.Builder
+	width := model.ImageEnv.ImageWidth()
+	height := model.ImageEnv.ImageHeight()
 
 	format.WriteString("P3\n" + strconv.Itoa(width) + " " + strconv.Itoa(height) + "\n255\n")
 	return format.String()
 }
 
-func createImage(width, height int) string {
+func createImage() string {
 	var image strings.Builder
+	width := model.ImageEnv.ImageWidth()
+	height := model.ImageEnv.ImageHeight()
+
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
 			color := model.Color{
@@ -30,6 +35,6 @@ func createImage(width, height int) string {
 	return image.String()
 }
 
-func CreateData(width, height int) string {
-	return createFormat(width, height) + createImage(width, height)
+func CreateData() string {
+	return createFormat() + createImage()
 }
