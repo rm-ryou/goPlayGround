@@ -1,6 +1,9 @@
 package model
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestAt(t *testing.T) {
 	orig := Vec3D{1, 2, 5}
@@ -27,20 +30,35 @@ func TestColor(t *testing.T) {
 
 	res := ray.Color()
 	if res != expected {
-		t.Errorf("expected %v", expected)
-		t.Errorf("result   %v", res)
+		t.Errorf("expected: %v", expected)
+		t.Errorf("result: %v", res)
 	}
 }
 
-func TestHitSphere(t *testing.T) {
+func TestIsHitSphere(t *testing.T) {
 	orig := Vec3D{0, 0, -1}
 	dir := Vec3D{0, 0, 1}
 	ray := Ray{orig, dir}
 
-	center := Vec3D{0, 0, 0}
-	radius := 1
+	t.Run("光が球と交差するときは解を返す", func(t *testing.T) {
+		center := Vec3D{0, 0, 0}
+		radius := 1
+		var expected float64 = 0
 
-	if !ray.isHitSphere(center, float64(radius)) {
-		t.Errorf("Results are incorrect")
-	}
+		res := ray.isHitSphere(center, float64(radius))
+		if res != expected {
+			t.Errorf("expected: %v", expected)
+			t.Errorf("result: %v", res)
+		}
+	})
+
+	t.Run("光が急と交差しない時はNaNを返す", func(t *testing.T) {
+		center := Vec3D{2, 2, 0}
+		radius := 1
+
+		res := ray.isHitSphere(center, float64(radius))
+		if !math.IsNaN(res) {
+			t.Errorf("result: %v", res)
+		}
+	})
 }
