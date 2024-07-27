@@ -9,7 +9,7 @@ type Sphere struct {
 	Radius float64
 }
 
-func (s *Sphere) Hit(ray Ray, rayTMax, rayTMin float64, rec *HitRecord) bool {
+func (s *Sphere) Hit(ray Ray, rayT Interval, rec *HitRecord) bool {
 	oc := s.Center.Sub(ray.Orig)
 	a := ray.Dir.Dot(ray.Dir)
 	h := ray.Dir.Dot(oc)
@@ -22,9 +22,9 @@ func (s *Sphere) Hit(ray Ray, rayTMax, rayTMin float64, rec *HitRecord) bool {
 
 	sqrtDiscriminant := math.Sqrt(discriminant)
 	root := (h - sqrtDiscriminant) / a
-	if root <= rayTMin || root >= rayTMax {
+	if !rayT.IsSurrouonds(root) {
 		root = (h + sqrtDiscriminant) / a
-		if root <= rayTMin || root >= rayTMax {
+		if !rayT.IsSurrouonds(root) {
 			return false
 		}
 	}

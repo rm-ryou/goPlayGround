@@ -30,7 +30,7 @@ func TestHitObjectList(t *testing.T) {
 		// Norm = Point / 50 = {0, 0, -1}
 		// IsFrontFace = true
 
-		res := objectList.Hit(ray, math.Inf(1), 0, rec)
+		res := objectList.Hit(ray, Interval{math.Inf(1), 0}, rec)
 		if res != true {
 			t.Errorf("result: %v", res)
 		}
@@ -54,7 +54,7 @@ func TestHitObjectList(t *testing.T) {
 		objectList.AddObject(Sphere{Vec3D{-10, 0, -1}, 2})
 		rec := new(HitRecord)
 
-		res := objectList.Hit(ray, math.Inf(1), 0, rec)
+		res := objectList.Hit(ray, Interval{math.Inf(1), 0}, rec)
 		if res != false {
 			t.Errorf("result: %v", res)
 		}
