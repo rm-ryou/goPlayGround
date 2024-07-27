@@ -1,16 +1,18 @@
 package model
 
 type imageEnv struct {
-	aspectRatio    float64
-	imageWidth     int
-	viewPortHeight float64
+	aspectRatio     float64
+	imageWidth      int
+	viewPortHeight  float64
+	samplesPerPixel int
 }
 
 var (
 	ImageEnv = imageEnv{
-		aspectRatio:    16.0 / 9.0,
-		imageWidth:     400,
-		viewPortHeight: 2.0,
+		aspectRatio:     16.0 / 9.0,
+		imageWidth:      400,
+		viewPortHeight:  2.0,
+		samplesPerPixel: 10,
 	}
 )
 
@@ -38,4 +40,8 @@ func (ie imageEnv) ViewPortWidth() float64 {
 
 func (ie imageEnv) ViewPortHeight() float64 {
 	return ie.viewPortHeight
+}
+
+func (ie imageEnv) SamplesPerPixel() int {
+	return ie.samplesPerPixel
 }
