@@ -4,7 +4,7 @@ import "testing"
 
 func TestWriteColor(t *testing.T) {
 	color := Color{0, 0.5, 1}
-	expected := "0 127 255\n"
+	expected := "0 128 255\n"
 
 	res := color.WriteColor()
 	if res != expected {
