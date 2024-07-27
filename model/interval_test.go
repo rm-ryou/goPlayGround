@@ -60,7 +60,7 @@ func TestIsSurrounds(t *testing.T) {
 func TestClamp(t *testing.T) {
 	intensity := Interval{0.999, 0}
 
-	t.Run("nがintensity.Minより小さい時はintensity.Minを返す", func (t *testing.T) {
+	t.Run("nがintensity.Minより小さい時はintensity.Minを返す", func(t *testing.T) {
 		var n float64 = -1
 		expected := intensity.Min
 
@@ -71,7 +71,7 @@ func TestClamp(t *testing.T) {
 		}
 	})
 
-	t.Run("nがintensity.Maxより大きい時はintensity.Maxを返す", func (t *testing.T) {
+	t.Run("nがintensity.Maxより大きい時はintensity.Maxを返す", func(t *testing.T) {
 		var n float64 = 1
 		expected := intensity.Max
 
@@ -82,7 +82,7 @@ func TestClamp(t *testing.T) {
 		}
 	})
 
-	t.Run("それ以外の時はnを返す", func (t *testing.T) {
+	t.Run("それ以外の時はnを返す", func(t *testing.T) {
 		var n float64 = 0.5
 		var expected float64 = 0.5
 
