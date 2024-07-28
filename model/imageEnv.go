@@ -5,6 +5,7 @@ type imageEnv struct {
 	imageWidth      int
 	viewPortHeight  float64
 	samplesPerPixel int
+	maxDepth        int
 }
 
 var (
@@ -13,6 +14,7 @@ var (
 		imageWidth:      400,
 		viewPortHeight:  2.0,
 		samplesPerPixel: 100,
+		maxDepth:        50,
 	}
 )
 
@@ -48,4 +50,8 @@ func (ie imageEnv) SamplesPerPixel() int {
 
 func (ie imageEnv) PixelSampleScale() float64 {
 	return 1 / float64(ie.samplesPerPixel)
+}
+
+func (ie imageEnv) MaxDepth() int {
+	return ie.maxDepth
 }

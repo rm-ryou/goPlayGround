@@ -1,6 +1,8 @@
 package model
 
-import "math"
+import (
+	"math"
+)
 
 type Vec3D struct {
 	X, Y, Z float64
@@ -91,4 +93,38 @@ func (v Vec3D) Vec3DToColor() Color {
 	b := withinRange(v.Z)
 
 	return Color{r, g, b}
+}
+
+func genRandomVecWithIn(max, min float64) Vec3D {
+	return Vec3D{
+		X: RandomFloatWithIn(max, min),
+		Y: RandomFloatWithIn(max, min),
+		Z: RandomFloatWithIn(max, min),
+	}
+}
+
+func genRandomVecInSphere() Vec3D {
+	p := genRandomVecWithIn(-1, 1)
+	if p.Dot(p) < 1 {
+		return p
+	} else {
+		return genRandomVecInSphere()
+	}
+}
+
+func GenRandomUnitVec(isTest bool) Vec3D {
+	if isTest {
+		return Vec3D{1, 1, 1}
+	} else {
+		return genRandomVecInSphere().Norm()
+	}
+}
+
+func (v Vec3D) GenRandomHemiSphere(isTest bool) Vec3D {
+	onUnitSphere := GenRandomUnitVec(isTest)
+	if v.Dot(onUnitSphere) > 0 {
+		return onUnitSphere
+	} else {
+		return onUnitSphere.MultiNum(-1)
+	}
 }

@@ -3,8 +3,16 @@ package model
 import "testing"
 
 func TestWriteColor(t *testing.T) {
-	color := Color{0, 0.5, 1}
-	expected := "0 128 255\n"
+	color := Color{0, 0.16, 1}
+
+	// gamma space
+	// r: 0
+	// g: 0.4
+	// b: 1
+	// rGammaSpace: 0
+	// gGammaSpace: 0.4 * 256 = 102
+	// bGammaSpace: 0.999 * 256 = 255
+	expected := "0 102 255\n"
 
 	res := color.WriteColor()
 	if res != expected {
