@@ -16,20 +16,26 @@ func createFormat(width, height int) string {
 
 func createImage(width, height int) string {
 	var image strings.Builder
+
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
-			color := model.Color{Vec3D: model.Vec3D{
-				X: float64(j) / (float64(width) - 1),
-				Y: float64(i) / (float64(height) - 1),
-				Z: 0,
-			}}
+			pixDeltaU := model.Camera.PixelDeltaU().MultiNum(float64(j))
+			pixDeltaV := model.Camera.PixelDeltaV().MultiNum(float64(i))
+			pixCenter := model.Camera.Pixel00Loc().Add(pixDeltaU.Add(pixDeltaV))
+			rayDir := pixCenter.Sub(model.Camera.Center())
 
+			ray := model.Ray{model.Camera.Center(), rayDir}
+
+			color := ray.Color()
 			image.WriteString(color.WriteColor())
 		}
 	}
 	return image.String()
 }
 
-func CreateData(width, height int) string {
+func CreateData() string {
+	width := model.ImageEnv.ImageWidth()
+	height := model.ImageEnv.ImageHeight()
+
 	return createFormat(width, height) + createImage(width, height)
 }
