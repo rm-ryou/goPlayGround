@@ -1,17 +1,15 @@
-package hittable
+package model
 
 import (
 	"math"
-
-	"github.com/rm-ryou/goPlayGround/model"
 )
 
 type Sphere struct {
-	Center model.Vec3D
+	Center Vec3D
 	Radius float64
 }
 
-func (s *Sphere) Hit(ray model.Ray, rayTMax, rayTMin float64, rec *model.HitRecord) bool {
+func (s *Sphere) Hit(ray Ray, rayTMax, rayTMin float64, rec *HitRecord) bool {
 	oc := s.Center.Sub(ray.Orig)
 	a := ray.Dir.Length()
 	h := ray.Dir.Dot(oc)
