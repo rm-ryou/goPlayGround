@@ -38,14 +38,14 @@ func TestColor(t *testing.T) {
 		// hitRecord.Norm = {0, 0, 1}
 
 		// info of HitRecord
-		// T = 50 because the second sphere is in front of the first
-		// Point = {0, 0, -50}
-		// Norm = Point / 50 = {0, 0, -1}
+		// T = 1 because the second sphere is in front of the first
+		// Point = {0, 0, 0}
+		// Norm = Point / 50 = {0, 0, 1}
 		// IsFrontFace = true
 
 		// expect
-		// ({1, 1, 1} + {0, 0, -1}) * 0.5 = {0.5, 0.5, 0}
-		expected := Color{0.5, 0.5, 0.5}
+		// ({1, 1, 1} + {0, 0, 1}) * 0.5 = {0.5, 0.5, 1}
+		expected := Color{0.5, 0.5, 1}
 
 		res := ray.Color(*objectList, 1, isTest)
 		if res != expected {
