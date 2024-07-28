@@ -17,7 +17,9 @@ func (r Ray) Color(worldObjects HittableList, isTest bool) Color {
 	hitRec := new(HitRecord)
 	if worldObjects.Hit(r, Interval{math.Inf(1), 0}, hitRec) {
 		dir := hitRec.Norm.GenRandomHemiSphere(isTest)
-		if isTest { return dir.MultiNum(0.5).Vec3DToColor() }
+		if isTest {
+			return dir.MultiNum(0.5).Vec3DToColor()
+		}
 		return Ray{hitRec.Point, dir}.Color(worldObjects, isTest).MultiNum(0.5)
 	}
 
