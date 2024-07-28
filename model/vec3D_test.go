@@ -141,3 +141,15 @@ func TestVec3DToColor(t *testing.T) {
 		t.Errorf("result   %v", res)
 	}
 }
+
+func TestGenRandomVecWithIn(t *testing.T) {
+	expected := Vec3D{5, 5, 5}
+	var max, min float64 = 10, 0
+	isTest := true
+
+	res := GenRandomVecWithIn(max, min, isTest)
+	if res != expected {
+		t.Errorf("expected %v", expected)
+		t.Errorf("result   %v", res)
+	}
+}

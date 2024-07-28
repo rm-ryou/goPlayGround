@@ -92,3 +92,23 @@ func (v Vec3D) Vec3DToColor() Color {
 
 	return Color{r, g, b}
 }
+
+func GenRandomVec() Vec3D {
+	return Vec3D{
+		X: RandomFloat(),
+		Y: RandomFloat(),
+		Z: RandomFloat(),
+	}
+}
+
+func GenRandomVecWithIn(max, min float64, isTest bool) Vec3D {
+	if isTest {
+		mid := (max - min) / 2
+		return Vec3D{X: mid, Y: mid, Z: mid}
+	}
+	return Vec3D{
+		X: RandomFloatWithIn(max, min),
+		Y: RandomFloatWithIn(max, min),
+		Z: RandomFloatWithIn(max, min),
+	}
+}
