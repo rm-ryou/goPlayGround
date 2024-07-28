@@ -24,7 +24,7 @@ func createImage(width, height int) string {
 			pixCenter := model.Camera.Pixel00Loc().Add(pixDeltaU.Add(pixDeltaV))
 			rayDir := pixCenter.Sub(model.Camera.Center())
 
-			ray := model.Ray{model.Camera.Center(), rayDir}
+			ray := model.Ray{Orig: model.Camera.Center(), Dir: rayDir}
 
 			color := ray.Color()
 			image.WriteString(color.WriteColor())
