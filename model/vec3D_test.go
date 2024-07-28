@@ -142,14 +142,29 @@ func TestVec3DToColor(t *testing.T) {
 	}
 }
 
-func TestGenRandomVecWithIn(t *testing.T) {
-	expected := Vec3D{5, 5, 5}
-	var max, min float64 = 10, 0
+func TestGenRandomHemiSphere(t *testing.T) {
 	isTest := true
+	t.Run("ランダムの単位ベクトルNVecとの内積が正の時、NVecを返す", func(t *testing.T) {
+		vec := Vec3D{-3, 4, 0}
+		// vec.Norm = {-0.6, 0.8, 0}
+		expected := Vec3D{1, 1, 1}
 
-	res := GenRandomVecWithIn(max, min, isTest)
-	if res != expected {
-		t.Errorf("expected %v", expected)
-		t.Errorf("result   %v", res)
-	}
+		res := vec.Norm().GenRandomHemiSphere(isTest)
+		if res != expected {
+			t.Errorf("expected %v", expected)
+			t.Errorf("result   %v", res)
+		}
+	})
+
+	t.Run("ランダムの単位ベクトルNVecとの内積が負の時、-NVecを返す", func(t *testing.T) {
+		vec := Vec3D{3, -4, 0}
+		// vec.Norm = {0.6, -0.8, 0}
+		expected := Vec3D{-1, -1, -1}
+
+		res := vec.Norm().GenRandomHemiSphere(isTest)
+		if res != expected {
+			t.Errorf("expected %v", expected)
+			t.Errorf("result   %v", res)
+		}
+	})
 }
