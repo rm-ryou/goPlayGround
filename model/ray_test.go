@@ -18,12 +18,24 @@ func TestAt(t *testing.T) {
 }
 
 func TestColor(t *testing.T) {
+	isTest := true
 	t.Run("球と交差するときは球の色を出力", func(t *testing.T) {
-		orig := Vec3D{0, 0, -100}
-		dir := Vec3D{0, 0, 1}
+		orig := Vec3D{0, 0, 1}
+		dir := Vec3D{0, 0, -1}
 		ray := Ray{orig, dir}
 		objectList := new(HittableList)
-		objectList.AddObject(Sphere{Vec3D{0, 0, 0}, 50})
+		objectList.AddObject(Sphere{Vec3D{0, 0, -1}, 1})
+
+		// point of hit sphere
+		// oc = {0, 0, -2}
+		// a = 1
+		// h = 2
+		// c = 3
+		// dirsc = 1
+		// root = 2 - 1 = 1
+		// hitRecord.T = 1
+		// hitRecord.Point = {0, 0, 0}
+		// hitRecord.Norm = {0, 0, 1}
 
 		// info of HitRecord
 		// T = 50 because the second sphere is in front of the first
@@ -33,9 +45,9 @@ func TestColor(t *testing.T) {
 
 		// expect
 		// ({1, 1, 1} + {0, 0, -1}) * 0.5 = {0.5, 0.5, 0}
-		expected := Color{0.5, 0.5, 0}
+		expected := Color{0.5, 0.5, 0.5}
 
-		res := ray.Color(*objectList)
+		res := ray.Color(*objectList, isTest)
 		if res != expected {
 			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)
@@ -52,7 +64,7 @@ func TestColor(t *testing.T) {
 		ray := Ray{orig, dir}
 		expected := Color{0.55, 0.73, 1}
 
-		res := ray.Color(HittableList{})
+		res := ray.Color(HittableList{}, isTest)
 		if res != expected {
 			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)

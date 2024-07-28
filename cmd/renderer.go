@@ -22,7 +22,7 @@ func createImage(width, height int, objectList model.HittableList) string {
 			pixelColor := model.Color{}
 			for sample := 0; sample < model.ImageEnv.SamplesPerPixel(); sample++ {
 				ray := model.Camera.CalcRay(float64(j), float64(i), false)
-				pixelColor = pixelColor.Add(ray.Color(objectList))
+				pixelColor = pixelColor.Add(ray.Color(objectList, false))
 			}
 			color := pixelColor.MultiNum(model.ImageEnv.PixelSampleScale())
 			image.WriteString(color.WriteColor())

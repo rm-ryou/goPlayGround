@@ -13,10 +13,12 @@ func (r Ray) At(t float64) Vec3D {
 	return r.Orig.Add(r.Dir.MultiNum(t))
 }
 
-func (r Ray) Color(worldObjects HittableList) Color {
+func (r Ray) Color(worldObjects HittableList, isTest bool) Color {
 	hitRec := new(HitRecord)
 	if worldObjects.Hit(r, Interval{math.Inf(1), 0}, hitRec) {
-		return Vec3D{1, 1, 1}.Add(hitRec.Norm).MultiNum(0.5).Vec3DToColor()
+		dir := hitRec.Norm.GenRandomHemiSphere(isTest)
+		if isTest { return dir.MultiNum(0.5).Vec3DToColor() }
+		return Ray{hitRec.Point, dir}.Color(worldObjects, isTest).MultiNum(0.5)
 	}
 
 	unitDir := r.Dir.Norm()
