@@ -18,11 +18,11 @@ func createImage(width, height int) string {
 	var image strings.Builder
 	for i := 0; i < height; i++ {
 		for j := 0; j < width; j++ {
-			color := model.Color{
-				R: float64(j) / (float64(width) - 1),
-				G: float64(i) / (float64(height) - 1),
-				B: 0,
-			}
+			color := model.Color{Vec3D: model.Vec3D{
+				X: float64(j) / (float64(width) - 1),
+				Y: float64(i) / (float64(height) - 1),
+				Z: 0,
+			}}
 
 			image.WriteString(color.WriteColor())
 		}
