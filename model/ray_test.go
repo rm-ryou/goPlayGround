@@ -47,7 +47,7 @@ func TestColor(t *testing.T) {
 		// ({1, 1, 1} + {0, 0, -1}) * 0.5 = {0.5, 0.5, 0}
 		expected := Color{0.5, 0.5, 0.5}
 
-		res := ray.Color(*objectList, isTest)
+		res := ray.Color(*objectList, 1, isTest)
 		if res != expected {
 			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)
@@ -64,7 +64,7 @@ func TestColor(t *testing.T) {
 		ray := Ray{orig, dir}
 		expected := Color{0.55, 0.73, 1}
 
-		res := ray.Color(HittableList{}, isTest)
+		res := ray.Color(HittableList{}, 1, isTest)
 		if res != expected {
 			t.Errorf("expected: %v", expected)
 			t.Errorf("result: %v", res)

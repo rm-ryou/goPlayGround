@@ -14,7 +14,7 @@ var (
 		imageWidth:      400,
 		viewPortHeight:  2.0,
 		samplesPerPixel: 100,
-		maxDepth:        10,
+		maxDepth:        50,
 	}
 )
 
