@@ -20,7 +20,7 @@ func (r Ray) isHitSphere(center Vec3D, radius float64) bool {
 }
 func (r Ray) Color() Color {
 	if r.isHitSphere(Vec3D{0, 0, -1}, 0.5) {
-		return Color{1, 0, 0}
+		return Color{Vec3D: Vec3D{1, 0, 0}}
 	}
 
 	unitDir := r.Dir.Norm()
